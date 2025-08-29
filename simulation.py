@@ -44,7 +44,7 @@ RESAMPLE_FREQUENCY = "1H"
 
 def read_price_data():
     """Read spot price data and format for analysis"""
-    price_file = "spot_data_2024.xlsx"
+    price_file = "data/spot_data_2024.xlsx"
     df_prices = pd.read_excel(price_file)
 
     # Use the correct column names based on actual data structure
@@ -60,7 +60,7 @@ def load_solar_data(pv_total):
     MAGIC_YEARLY_PV_MULTIPLIER = 1000
     INTERVAL_HOURS = 0.25
 
-    df_pv = pd.read_csv("solar_data_de_small.csv")
+    df_pv = pd.read_csv("data/solar_data_de_small.csv")
 
     df_pv["timestamp"] = pd.to_datetime(df_pv["timestamp"], format="%d.%m.%y %H:%M", utc=True)
     df_pv["yearly_production_kw"] = df_pv["yearly_production_fraction"].astype(float).to_numpy().clip(min=0) * pv_total * MAGIC_YEARLY_PV_MULTIPLIER / INTERVAL_HOURS
